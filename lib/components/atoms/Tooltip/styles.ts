@@ -6,7 +6,7 @@ export const Container = styled.div`
   left: 50%;
   transform: translateX(-50%);
 
-  background-color: ${({ theme }) => theme.colors.gray500};
+  background-color: ${({ theme }) => theme.colors.blueGray};
   padding: 4px;
 
   text-align: center;

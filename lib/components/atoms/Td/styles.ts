@@ -11,5 +11,5 @@ export const Td = styled.td<TdStyleProps>`
   font-weight: 400;
   color: ${({ theme }) => theme.colors.gray600};
 
-  padding: 8px;
+  padding: 6px 8px;
 `;
