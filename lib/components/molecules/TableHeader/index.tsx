@@ -6,7 +6,7 @@ import { Th } from "../../atoms/Th";
 import { Thead } from "../../atoms/Thead";
 import { Tr } from "../../atoms/Tr";
 
-type TheaderProps<T> = {
+type TableHeaderProps<T> = {
   filteredColumns: Column<T>[];
   columnAlign: ColumnAlign[];
   columnMenuIndex: number | null;
@@ -14,13 +14,13 @@ type TheaderProps<T> = {
   setSort: (type: SortType, field: keyof T) => void;
 };
 
-export const Theader = <T,>({
+export const TableHeader = <T,>({
   filteredColumns,
   columnAlign,
   columnMenuIndex,
   handleColumnMenu,
   setSort,
-}: TheaderProps<T>) => {
+}: TableHeaderProps<T>) => {
   return (
     <Thead>
       <Tr>

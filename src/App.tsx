@@ -33,11 +33,11 @@ export const Playground = () => {
 const Template = styled.main`
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 8px;
 
-  height: calc(100dvh - 32px);
   padding: 16px;
 
   background-color: #f4f7f9;
+
+  height: calc(100dvh - 32px);
 `;

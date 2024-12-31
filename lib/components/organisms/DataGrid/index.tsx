@@ -9,7 +9,7 @@ import { Table } from "../../atoms/Table";
 import { Tbody } from "../../atoms/Tbody";
 import { Td } from "../../atoms/Td";
 import { Tr } from "../../atoms/Tr";
-import { Theader } from "../../molecules/Theader";
+import { TableHeader } from "../../molecules/TableHeader";
 
 export const DataGrid = <T,>({ data, columns }: DataGridProps<T>) => {
   const { filteredColumns } = useColumnFilter({ columns });
@@ -29,7 +29,7 @@ export const DataGrid = <T,>({ data, columns }: DataGridProps<T>) => {
 
   return (
     <Table>
-      <Theader
+      <TableHeader
         filteredColumns={filteredColumns}
         columnAlign={columnAlign}
         columnMenuIndex={columnMenuIndex}
