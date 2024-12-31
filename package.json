@@ -1,6 +1,6 @@
 {
-  "name": "@receter/my-component-library",
-  "author": "Andreas Riedmüller",
+  "name": "data-grid",
+  "author": "Rafael Krämer da Silva",
   "private": false,
   "version": "0.0.1",
   "type": "module",
@@ -9,10 +9,6 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/receter/my-component-library"
-  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -43,5 +39,9 @@
     "vite": "^4.5.3",
     "vite-plugin-dts": "^3.7.3",
     "vite-plugin-lib-inject-css": "^2.0.1"
+  },
+  "dependencies": {
+    "react-icons": "^5.4.0",
+    "styled-components": "^6.1.13"
   }
 }

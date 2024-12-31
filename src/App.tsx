@@ -1,51 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button, Label, Input } from '../';
+import styled from "styled-components";
+import { DataGridProvider } from "../lib/App";
+import { MockData } from "./constants/mock-data";
+import { MockDataModel } from "./models/mock-data-model";
 
-function App() {
-  const [count, setCount] = useState(0)
-  const [inputCustomCountValue, setInputCustomCountValue] = useState('');
-
-  const handleClickCustomCount = () => {
-    if (inputCustomCountValue === '') {
-      setCount(count => count + 1);
-    } else {
-      setCount(Number(inputCustomCountValue));
-    }
-  }
-
+export const Playground = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Label>My Label</Label><br />
-        <Input
-          placeholder="Custom count"
-          value={inputCustomCountValue}
-          onChange={(e) => setInputCustomCountValue(e.target.value)}
-        /><br />
-        <Button onClick={handleClickCustomCount}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Template>
+      <DataGridProvider<MockDataModel>
+        data={MockData}
+        columns={[
+          { label: "Código", field: "id", type: "number" },
+          { label: "Nome", field: "name", type: "string" },
+          { label: "Telefone", field: "phone", type: "number", mask: "phone" },
+          { label: "CPF", field: "cpf", type: "number", mask: "cpf" },
+          { label: "Salário", field: "salary", type: "decimal" }, // type: "decimal" aplica mascará decimal automaticamente
+          {
+            label: "Status",
+            field: "status",
+            type: "string",
+            // Exemplo usando máscara personalizada
+            mask: ({ status }) => {
+              if (status === 0) return "Processando";
+              return "Finalizado";
+            },
+          },
+        ]}
+      />
+    </Template>
+  );
+};
 
-export default App
+const Template = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  height: calc(100dvh - 32px);
+  padding: 16px;
+
+  background-color: #f4f7f9;
+`;
