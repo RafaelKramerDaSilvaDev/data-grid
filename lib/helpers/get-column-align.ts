@@ -1,16 +1,17 @@
 import { Column } from "../@types/column";
+import { ColumnAlign } from "../@types/column-align";
 import { getAlign } from "./get-align";
 
 export const getColumnAlign = <T>(data: T[], columns: Column<T>[]) => {
-  const columnData: { align: "left" | "right" }[] = [];
+  const columnAlign: ColumnAlign[] = [];
 
   data.forEach(() => {
     return columns.forEach(({ type }) => {
       const align = getAlign(type);
 
-      columnData.push({ align });
+      columnAlign.push(align);
     });
   });
 
-  return columnData;
+  return columnAlign;
 };

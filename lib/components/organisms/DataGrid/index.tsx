@@ -3,15 +3,13 @@ import { useState } from "react";
 import { DataGridProps } from "../../../@types/data-grid-props";
 import { applyMask } from "../../../helpers/apply-mask";
 import { getColumnAlign } from "../../../helpers/get-column-align";
-import { getReverseDirectionColumnMenu } from "../../../helpers/get-reverse-direction-column-menu";
 import { useColumnFilter } from "../../../hooks/useColumnFilter";
 import { useDataFilter } from "../../../hooks/useDataFilter";
 import { Table } from "../../atoms/Table";
 import { Tbody } from "../../atoms/Tbody";
 import { Td } from "../../atoms/Td";
-import { Th } from "../../atoms/Th";
-import { Thead } from "../../atoms/Thead";
 import { Tr } from "../../atoms/Tr";
+import { Theader } from "../../molecules/Theader";
 
 export const DataGrid = <T,>({ data, columns }: DataGridProps<T>) => {
   const { filteredColumns } = useColumnFilter({ columns });
@@ -31,31 +29,13 @@ export const DataGrid = <T,>({ data, columns }: DataGridProps<T>) => {
 
   return (
     <Table>
-      <Thead>
-        <Tr>
-          {filteredColumns.map(({ label, field }, columnIndex) => {
-            const align = columnAlign[columnIndex].align;
-            const columnMenuOpen = columnMenuIndex === columnIndex;
-            const enabledTooltip = columnMenuIndex === null;
-            const reverseDirectionColumnMenu = getReverseDirectionColumnMenu(
-              filteredColumns.length,
-              columnIndex
-            );
-
-            return (
-              <Th
-                align={align}
-                label={label}
-                onColumnMenu={() => handleColumnMenu(columnIndex)}
-                columnMenuOpen={columnMenuOpen}
-                enabledTooltip={enabledTooltip}
-                reverseDirectionColumnMenu={reverseDirectionColumnMenu}
-                onSort={(type) => setSort(type, field)}
-              />
-            );
-          })}
-        </Tr>
-      </Thead>
+      <Theader
+        filteredColumns={filteredColumns}
+        columnAlign={columnAlign}
+        columnMenuIndex={columnMenuIndex}
+        handleColumnMenu={handleColumnMenu}
+        setSort={setSort}
+      />
 
       <Tbody>
         {filteredData.map((item) => {
@@ -63,7 +43,7 @@ export const DataGrid = <T,>({ data, columns }: DataGridProps<T>) => {
             <Tr>
               {filteredColumns.map(
                 ({ field, mask, digits, type }, columnIndex) => {
-                  const align = columnAlign[columnIndex].align;
+                  const align = columnAlign[columnIndex];
                   const value = item[field];
                   const maskedValue = applyMask<T>(
                     String(value),
