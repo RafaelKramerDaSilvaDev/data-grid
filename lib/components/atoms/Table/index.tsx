@@ -6,9 +6,5 @@ type TableProps = {
 };
 
 export const Table = ({ children }: TableProps) => {
-  return (
-    <S.Scroll>
-      <S.Table>{children}</S.Table>
-    </S.Scroll>
-  );
+  return <S.Table>{children}</S.Table>;
 };
