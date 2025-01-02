@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Th = styled.th`
   position: relative;
+  background-color: ${({ theme }) => theme.colors.gray};
 `;
 
 export const Flex = styled.div`

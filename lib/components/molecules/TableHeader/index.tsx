@@ -35,6 +35,7 @@ export const TableHeader = <T,>({
 
           return (
             <Th
+              key={label}
               align={align}
               label={label}
               onColumnMenu={() => handleColumnMenu(columnIndex)}
