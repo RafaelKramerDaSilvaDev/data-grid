@@ -1,13 +1,24 @@
+import { faker } from "@faker-js/faker";
 import styled from "styled-components";
 import { DataGridProvider } from "../lib/App";
-import { MockData } from "./constants/mock-data";
 import { MockDataModel } from "./models/mock-data-model";
 
+const MOCK_DATA_QUANTITY = 1000;
+
 export const Playground = () => {
+  const mockData = Array.from({ length: MOCK_DATA_QUANTITY }, (_, index) => ({
+    id: index + 1,
+    name: faker.person.fullName(),
+    phone: faker.phone.number({ style: "national" }),
+    cpf: faker.string.numeric(11),
+    salary: faker.number.int({ min: 1000, max: 10000 }),
+    status: faker.number.int({ min: 0, max: 1 }),
+  }));
+
   return (
     <Template>
       <DataGridProvider<MockDataModel>
-        data={MockData}
+        data={mockData}
         columns={[
           { label: "Código", field: "id", type: "number" },
           { label: "Nome", field: "name", type: "string" },
