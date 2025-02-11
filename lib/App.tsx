@@ -1,6 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { DataGridProps } from "./@types/data-grid-props";
-import { DataGrid } from "./components/organisms/DataGrid";
+import { DataGrid } from "./components/DataGrid";
 import { GlobalStyles } from "./styles/global-styles";
 import { theme } from "./styles/theme/theme";
 

@@ -1,30 +1,62 @@
 import { faker } from "@faker-js/faker";
 import styled from "styled-components";
 import { DataGridProvider } from "../lib/App";
-import { MockDataModel } from "./models/mock-data-model";
 
-const MOCK_DATA_QUANTITY = 1000;
+const mockData = Array.from({ length: 1000 }, (_, index) => ({
+  id: index + 1,
+  name: faker.person.fullName(),
+  phone: faker.phone.number({ style: "national" }),
+  cpf: faker.string.numeric(11),
+  salary: faker.number.int({ min: 1000, max: 10000 }),
+  status: faker.number.int({ min: 0, max: 1 }),
+}));
+
+interface MockDataModel {
+  id: number;
+  name: string;
+  phone: string;
+  cpf: string;
+  salary: number;
+  status: number;
+}
 
 export const Playground = () => {
-  const mockData = Array.from({ length: MOCK_DATA_QUANTITY }, (_, index) => ({
-    id: index + 1,
-    name: faker.person.fullName(),
-    phone: faker.phone.number({ style: "national" }),
-    cpf: faker.string.numeric(11),
-    salary: faker.number.int({ min: 1000, max: 10000 }),
-    status: faker.number.int({ min: 0, max: 1 }),
-  }));
-
   return (
     <Template>
       <DataGridProvider<MockDataModel>
         data={mockData}
         columns={[
-          { label: "Código", field: "id", type: "number" },
-          { label: "Nome", field: "name", type: "string" },
-          { label: "Telefone", field: "phone", type: "number", mask: "phone" },
-          { label: "CPF", field: "cpf", type: "number", mask: "cpf" },
-          { label: "Salário", field: "salary", type: "decimal" }, // type: "decimal" aplica mascará decimal automaticamente
+          {
+            label: "Código",
+            field: "id",
+            type: "number",
+            width: 120,
+          },
+          {
+            label: "Nome",
+            field: "name",
+            type: "string",
+          },
+          {
+            label: "Telefone",
+            field: "phone",
+            type: "number",
+            mask: "phone",
+            width: 120,
+          },
+          {
+            label: "CPF",
+            field: "cpf",
+            type: "number",
+            mask: "cpf",
+            width: 120,
+          },
+          {
+            label: "Salário",
+            field: "salary",
+            type: "decimal", // type: "decimal" aplica mascará decimal automaticamente
+            width: 120,
+          },
           {
             label: "Status",
             field: "status",
@@ -34,6 +66,7 @@ export const Playground = () => {
               if (status === 0) return "Processando";
               return "Finalizado";
             },
+            width: 120,
           },
         ]}
       />

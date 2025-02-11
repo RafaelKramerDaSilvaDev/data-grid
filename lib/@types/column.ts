@@ -1,5 +1,5 @@
-import { ColumnMask } from './column-mask';
-import { ColumnType } from './column-type';
+import { ColumnMask } from "./column-mask";
+import { ColumnType } from "./column-type";
 
 export type Column<T> = {
   label: string;
@@ -7,4 +7,5 @@ export type Column<T> = {
   type: ColumnType;
   mask?: ColumnMask<T>;
   digits?: number;
+  width?: number;
 };

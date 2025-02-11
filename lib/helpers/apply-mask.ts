@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ColumnMask } from "../@types/column-mask";
 import { ColumnType } from "../@types/column-type";
 import { cpfMask } from "../utils/masks/cpf-mask";
@@ -11,13 +12,21 @@ import { rgMask } from "../utils/masks/rg-mask";
 import { timeMask } from "../utils/masks/time-mask";
 import { zipcodeMask } from "../utils/masks/zipcode-mask";
 
-export const applyMask = <T>(
-  value: string,
-  item: T,
-  mask: ColumnMask<T> | undefined,
-  digits: number | undefined,
-  type: ColumnType
-) => {
+type ApplyMaskParams<T = any> = {
+  value: string;
+  item: T;
+  mask: ColumnMask<T> | undefined;
+  digits: number | undefined;
+  type: ColumnType;
+};
+
+export const applyMask = <T>({
+  value,
+  item,
+  mask,
+  digits,
+  type,
+}: ApplyMaskParams<T>) => {
   if (typeof mask === "function") {
     return mask(item);
   }
