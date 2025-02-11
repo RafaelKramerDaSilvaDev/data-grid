@@ -28,9 +28,12 @@ export const TableHeadCell = ({
   onSort,
   width,
 }: TableHeadCellProps) => {
+  const [enabledDraggable, setEnabledDraggable] = useState(true);
+
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: label,
+      disabled: !enabledDraggable,
     });
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -39,6 +42,11 @@ export const TableHeadCell = ({
   const { colors } = useTheme();
 
   const tooltipShow = hover && enabledTooltip && !isDragging;
+
+  const disabledDraggableForClickable = {
+    onMouseEnter: () => setEnabledDraggable(false),
+    onMouseLeave: () => setEnabledDraggable(true),
+  };
 
   return (
     <S.TableHeadCell
@@ -53,8 +61,11 @@ export const TableHeadCell = ({
       <S.Flex>
         <S.Span $align={align}>{label}</S.Span>
 
-        {/* TODO: Devido a @dnd-kit o botão não é mais clicável */}
-        <S.ArrowButton ref={buttonRef} onClick={onColumnMenu}>
+        <S.ArrowButton
+          ref={buttonRef}
+          onClick={onColumnMenu}
+          {...disabledDraggableForClickable}
+        >
           <IoIosArrowDown color={colors.gray600} fontSize={12} />
         </S.ArrowButton>
       </S.Flex>
@@ -65,6 +76,7 @@ export const TableHeadCell = ({
         onSort={onSort}
         onClose={onColumnMenu}
         buttonRef={buttonRef}
+        {...disabledDraggableForClickable}
       />
 
       <Tooltip label={label} show={tooltipShow} />

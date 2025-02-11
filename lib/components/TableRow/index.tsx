@@ -4,7 +4,7 @@ import * as S from "./styles";
 type TableRowProps = {
   children?: React.ReactNode;
   style?: React.CSSProperties;
-  dataIndex: number;
+  dataIndex?: number;
 };
 
 export const TableRow = ({ children, style, dataIndex }: TableRowProps) => {

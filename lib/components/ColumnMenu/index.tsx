@@ -23,6 +23,7 @@ export const ColumnMenu = ({
   onSort,
   onClose,
   buttonRef,
+  ...props
 }: ColumnMenuProps) => {
   const { ref } = useClickOutside<HTMLDivElement>({
     onClickOutside: onClose,
@@ -32,7 +33,7 @@ export const ColumnMenu = ({
   if (!open) return null;
 
   return (
-    <S.Container ref={ref} $reverseDirection={reverseDirection}>
+    <S.Container ref={ref} $reverseDirection={reverseDirection} {...props}>
       <S.Button onClick={() => onSort("ascend")}>
         <FaSortAmountDownAlt />
         Ordem Ascendente
