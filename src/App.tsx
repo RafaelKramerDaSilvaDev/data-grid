@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import styled from "styled-components";
 import { DataGridProvider } from "../lib/App";
 
-const mockData = Array.from({ length: 1000 }, (_, index) => ({
+const mockData = Array.from({ length: 500 }, (_, index) => ({
   id: index + 1,
   name: faker.person.fullName(),
   phone: faker.phone.number({ style: "national" }),
