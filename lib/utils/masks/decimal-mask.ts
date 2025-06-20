@@ -1,7 +1,6 @@
 import { onlyNumbers } from "../formatters/only-numbers";
 
-export const decimalMask = (value: string, digits?: number) => {
-  digits = 2;
+export const decimalMask = (value: string, digits: number = 2) => {
 
   const numericValue = onlyNumbers(value);
 
